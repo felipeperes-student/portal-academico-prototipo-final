@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: light; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply min-w-[320px] bg-slate-50 font-sans text-slate-900 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.indigo.600');
+    outline-offset: 2px;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: theme('colors.slate.300'); border-radius: 999px; }
+}
+
+@layer components {
+  .card { @apply rounded-2xl border border-slate-200 bg-white shadow-sm; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply btn bg-indigo-600 text-white hover:bg-indigo-700; }
+  .btn-secondary { @apply btn border border-slate-300 bg-white text-slate-800 hover:bg-slate-50; }
+
+  .field {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 aria-[invalid=true]:border-rose-600 aria-[invalid=true]:focus:ring-rose-100;
+  }
+}
+
+/* Uma única animação de entrada, usada ao trocar de página */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page { animation: page-in .2s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body { background: #fff; }
+  .card { box-shadow: none; }
+}
